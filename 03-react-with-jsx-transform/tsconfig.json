@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "strict": true,
+    "module": "esnext",
+    "removeComments": true,
+    "skipLibCheck": true,
+    "jsx": "react"
+  }
+}
