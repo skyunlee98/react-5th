@@ -5,7 +5,23 @@ const listData = {
   items: [],
 };
 
+// listData.items 이때
+// 특정 함수 실행
 
+
+// 우회, 대체
+
+// reactiveListData.items
+// reactiveListData.items = [..]
+
+
+/* 
+
+target    : 원래 감싼 대상 객체 (listData)  => { items:[...] }
+prop      : 접근하려는 속성 키              => 'items'
+newValue  : 새로 설정하려는 값              => [ ...reactiveListData.items,{...} ]
+
+*/
 
 const reactiveListData = new Proxy(listData,{
 
