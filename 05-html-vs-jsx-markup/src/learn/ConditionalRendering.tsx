@@ -50,7 +50,6 @@ function ConditionalRendering({ imageType }: Props) {
       </dd>
       <dd>
         <p>spinner 또는 vite 이미지가 랜덤으로 화면에 렌더링 되도록 합니다.</p>
-
         <div className="conditionalRendering"> {spinnerOrVite} </div>
       </dd>
     </>
