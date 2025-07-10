@@ -1,17 +1,17 @@
 
 
 interface Props {
-  onClick: () => void;
+  onClick: (e:React.MouseEvent<HTMLDivElement>) => void;
   // style: React.CSSProperties & {'--color'? : string}
   style: React.CSSProperties & {[key:string]:string | number};
-  children?: React.ReactNode
+  children?: React.ReactNode;
+  title?: string;
 }
 
-function LayoutBox({onClick,style,children}:Props) {
-
+function LayoutBox({onClick,children,...restProps}:Props) {
 
   return (
-    <div className="box" onClick={onClick} style={style}> {children} </div>
+    <div className="box" onClick={onClick} {...restProps}> {children}</div>
   )
 }
 export default LayoutBox

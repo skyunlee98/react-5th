@@ -1,6 +1,7 @@
 import { useState } from "react"
 import EventHandlerProp from "./EventHandlerProp"
 import EventPropagation from "./EventPropagation"
+import EventWithSideEffects from "./EventWithSideEffects"
 
 
 
@@ -61,6 +62,7 @@ function RespondingToEvents(){
 
       <EventHandlerProp onUpdateMessage={updateMessage} />
       <EventPropagation />
+      <EventWithSideEffects />
 
     </div>
   )
