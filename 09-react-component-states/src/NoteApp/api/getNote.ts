@@ -14,7 +14,7 @@ export type Note = (typeof notesData)[number] & {
 
 export function getNoteList():Note[]{
   return notesData.map((note)=>{
-    const user = usersData.find((user)=>user.id === note.userId)
+    const user = usersData.find((user)=>user.id === note.userId);
     if(user){
       (note as Note).expand = {user}
     }
@@ -25,7 +25,7 @@ export function getNoteList():Note[]{
 
 
 
-export function getNoteItem(noteId:number){
+export function getNoteItem(noteId:number):Note | null{
   const notes = getNoteList();
   const note = notes.find((note)=> note.id === noteId);
   return note ? note : null;
