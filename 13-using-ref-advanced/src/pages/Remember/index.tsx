@@ -1,6 +1,6 @@
 
 import { useId, useRef, useState } from 'react'
-import S from './Remember.module.css'
+import S from './style.module.css'
 
 function Remember() {
 
