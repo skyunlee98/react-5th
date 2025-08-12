@@ -31,6 +31,7 @@ const b = Root
 // import ConcertsHome from "@/pages/Concerts/ConcertsHome";
 // import Trending from "@/pages/Concerts/Trending";
 // import NotFound from "@/pages/NotFound";
+// import UserDetail from "@/pages/User/UserDetail";
 import { loader as trendingLoader } from "@/pages/Concerts/Trending.tsx";
 import { lazy } from "react";
 import { createBrowserRouter, Outlet } from "react-router";
@@ -56,7 +57,7 @@ const City = lazy(()=> import('@/pages/Concerts/City.tsx'));
 const NotFound = lazy(()=> import('@/pages/NotFound'));
 
 
-
+const UserDetail = lazy(()=> import('@/pages/User/UserDetail'));
 
 
 export const routes = createBrowserRouter([
@@ -100,7 +101,30 @@ export const routes = createBrowserRouter([
             // }
           },
         ]
+      },
+
+      /* user routes */
+      {
+        path: 'users/:userId',
+        handle:{label:'users',showInNav:false},
+        Component: UserDetail,
+        HydrateFallback: () => null,
+        loader: async ({params}) => {
+
+          // react-router 알아서 실행 해당 컴포넌트 페이지에 들어가기 전
+          // const res = await fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}`);
+          // return res.json();
+
+          return {
+            user: fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}`).
+            then((res)=>{
+              if(!res.ok) throw new Error('유저 어딨습니까?')
+              return res.json();
+            })
+          }
+        }
       }
+
     ]
   },
   { path:'*', Component: NotFound }
