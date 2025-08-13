@@ -34,7 +34,7 @@ const b = Root
 // import UserDetail from "@/pages/User/UserDetail";
 import { loader as trendingLoader } from "@/pages/Concerts/Trending.tsx";
 import { lazy } from "react";
-import { createBrowserRouter, Outlet } from "react-router";
+import { createBrowserRouter, Outlet, redirect } from "react-router";
 
 
 
@@ -58,7 +58,7 @@ const NotFound = lazy(()=> import('@/pages/NotFound'));
 
 
 const UserDetail = lazy(()=> import('@/pages/User/UserDetail'));
-
+const NewUser = lazy(()=> import('@/pages/User/NewUser'))
 
 export const routes = createBrowserRouter([
   {
@@ -94,10 +94,18 @@ export const routes = createBrowserRouter([
             Component:Trending,
             HydrateFallback: () => <div>데이터 로딩 중....</div>,
             handle: { label:'Trending', showInNav:true },
-            loader: trendingLoader
-            // loader: async () => {
-            //   const res = await fetch('https://jsonplaceholder.typicode.com/users');
-            //   return res.json();
+            // loader: trendingLoader
+            loader: async () => {
+              const res = await fetch('https://jsonplaceholder.typicode.com/users');
+              return res.json();
+            }
+            // lazy: async() => {
+            //   const mod = await import('@/pages/Concerts/Trending');
+
+            //   return {
+            //     Component: mod.default, // default export 컴포넌트
+            //     loader: mod.loader      // named export loader
+            //   }
             // }
           },
         ]
@@ -122,6 +130,31 @@ export const routes = createBrowserRouter([
               return res.json();
             })
           }
+        }
+      },
+      {
+        path:'users/new',
+        Component: NewUser,
+        // lazy: async () => {
+        //   return {
+        //     Component:'',
+        //     loader:,
+        //     action
+        //   }
+        // }
+        action: async ({request}) => {
+          const formData = await request.formData();
+          const name = formData.get('name') as string;
+          const email = formData.get('email') as string;
+
+          console.log(name, email);
+
+          // const {data, error} = await supabase.from('users').insert({name,email})
+          // if(error){
+          //   throw new Error('...')
+          // }
+
+          return redirect('/users');
         }
       }
 
